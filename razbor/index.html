@@ -1,0 +1,1188 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Первые два дня Amazonia</title>
+<meta name="description" content="Разбор демо-версии MyFinishLine Amazonia Route: прохождение вживую, работы и сегменты по AJTBD, кликабельный прототип нового триала.">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Первые два дня Amazonia">
+<meta property="og:description" content="Почему из 100 зашедших в демо покупают 15, и как сделать 30-45. Разбор, работы клиента и кликабельный прототип.">
+<meta property="og:url" content="https://nikit34.github.io/amazonia-trial/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2316211C'/%3E%3Cpath d='M8 24c3-9 6-3 8-9s5-4 8-9' stroke='%23C94D24' stroke-width='2.6' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='8' cy='24' r='3' fill='%23C94D24'/%3E%3Ccircle cx='24' cy='6' r='3' fill='%23E7E9E3'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400..900&family=IBM+Plex+Mono:wght@400;500;600&family=Literata:opsz,wght@7..72,400;7..72,500&display=swap">
+<style>
+html{color-scheme:light dark}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+
+<style>
+:root{
+  --paper:#E7E9E3;
+  --surface:#F4F5F1;
+  --surface-2:#DDE1DA;
+  --ink:#16211C;
+  --ink-2:#4A574F;
+  --ink-3:#7C867E;
+  --rule:#C7CDC3;
+  --rule-soft:#D6DBD2;
+  --route:#C94D24;
+  --route-soft:#F0DCD3;
+  --deep:#2C6355;
+  --deep-soft:#D7E2DD;
+  --warn:#96281C;
+  --warn-soft:#F2DAD6;
+  --good:#3A7245;
+
+  --display:"Golos Text","Helvetica Neue",Arial,sans-serif;
+  --body:"Literata",Georgia,"Times New Roman",serif;
+  --mono:"IBM Plex Mono","SFMono-Regular",Menlo,monospace;
+
+  --gutter:20px;
+  --maxw:1120px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0E1512;
+    --surface:#17201C;
+    --surface-2:#1F2B26;
+    --ink:#DEE6DF;
+    --ink-2:#9EADA3;
+    --ink-3:#6C7A71;
+    --rule:#2B3833;
+    --rule-soft:#222E29;
+    --route:#EE7440;
+    --route-soft:#3A2419;
+    --deep:#59AD95;
+    --deep-soft:#17302A;
+    --warn:#E2695D;
+    --warn-soft:#331C19;
+    --good:#6EBD7C;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0E1512;
+  --surface:#17201C;
+  --surface-2:#1F2B26;
+  --ink:#DEE6DF;
+  --ink-2:#9EADA3;
+  --ink-3:#6C7A71;
+  --rule:#2B3833;
+  --rule-soft:#222E29;
+  --route:#EE7440;
+  --route-soft:#3A2419;
+  --deep:#59AD95;
+  --deep-soft:#17302A;
+  --warn:#E2695D;
+  --warn-soft:#331C19;
+  --good:#6EBD7C;
+}
+
+*{box-sizing:border-box}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--body);
+  font-size:16px;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+.shell{max-width:var(--maxw);margin:0 auto;padding-inline:var(--gutter);padding-block:0}
+
+h1,h2,h3,h4{font-family:var(--display);font-weight:800;line-height:1.08;text-wrap:balance;margin:0}
+h1{font-size:clamp(34px,7vw,66px);letter-spacing:-.025em;font-weight:900}
+h2{font-size:clamp(25px,3.6vw,38px);letter-spacing:-.02em}
+h3{font-size:clamp(19px,2.2vw,23px);letter-spacing:-.01em;font-weight:700}
+h4{font-size:16px;font-weight:700;letter-spacing:-.005em}
+p{margin:0}
+.prose{max-width:66ch;display:flex;flex-direction:column;gap:1.05em}
+.prose p{font-size:16.5px}
+strong{font-weight:600;color:var(--ink)}
+a{color:var(--route)}
+.lead{font-family:var(--display);font-size:clamp(18px,2.4vw,23px);line-height:1.42;font-weight:500;color:var(--ink);max-width:30ch}
+.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);font-weight:500}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+.topbar{
+  position:sticky;top:env(safe-area-inset-top,0px);z-index:50;
+  background:color-mix(in srgb,var(--paper) 88%,transparent);
+  backdrop-filter:blur(10px);border-bottom:1px solid var(--rule-soft);
+}
+.topbar-in{max-width:var(--maxw);margin:0 auto;padding-inline:var(--gutter);display:flex;align-items:center;justify-content:space-between;gap:14px;height:52px}
+.topbar strong{font-family:var(--display);font-size:13.5px;font-weight:700;letter-spacing:-.01em}
+
+.hero{padding-block:clamp(44px,8vw,86px) clamp(34px,5vw,54px);border-bottom:1px solid var(--rule)}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:end}
+@media(max-width:860px){.hero-grid{grid-template-columns:1fr;align-items:start}}
+.hero h1{margin-top:14px}
+.hero .lead{margin-top:20px;color:var(--ink-2)}
+
+.scoreboard{display:flex;flex-direction:column;gap:2px;border-top:2px solid var(--ink);padding-top:14px}
+.score-row{display:grid;grid-template-columns:auto 1fr auto;align-items:baseline;gap:12px;padding-block:9px;border-bottom:1px solid var(--rule-soft)}
+.score-row:last-child{border-bottom:0}
+.score-val{font-family:var(--display);font-weight:900;font-size:30px;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.score-lbl{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-3)}
+.score-note{font-family:var(--display);font-size:12.5px;color:var(--ink-2);text-align:right;max-width:16ch;line-height:1.3}
+.score-row.now .score-val{color:var(--warn)}
+.score-row.fix .score-val{color:var(--deep)}
+.score-row.offer .score-val{color:var(--route)}
+
+section{padding-block:clamp(46px,7vw,84px);border-bottom:1px solid var(--rule)}
+section:last-of-type{border-bottom:0}
+.sec-head{display:grid;grid-template-columns:44px minmax(0,1fr);gap:clamp(14px,2.5vw,26px);align-items:start;margin-bottom:clamp(22px,3vw,36px)}
+.sec-num{font-family:var(--mono);font-size:12px;font-weight:600;color:var(--route);border:1.5px solid var(--route);border-radius:50%;width:34px;height:34px;display:grid;place-items:center;margin-top:4px}
+.sec-head .sub{margin-top:10px;color:var(--ink-2);max-width:62ch;font-size:16.5px}
+.sec-body{display:grid;grid-template-columns:44px minmax(0,1fr);gap:clamp(14px,2.5vw,26px)}
+@media(max-width:700px){
+  .sec-head,.sec-body{grid-template-columns:1fr}
+  .sec-body > .spacer{display:none}
+  .sec-num{margin-bottom:-6px}
+}
+
+.route{list-style:none;margin:0;padding:0;position:relative}
+.route::before{content:"";position:absolute;left:11px;top:10px;bottom:10px;width:2px;background:var(--rule);border-radius:2px}
+.step{position:relative;padding-left:40px;padding-block:13px;display:flex;flex-direction:column;gap:5px}
+.step .dot{position:absolute;left:0;top:16px;width:24px;height:24px;border-radius:50%;background:var(--surface);border:2px solid var(--rule);display:grid;place-items:center;font-family:var(--mono);font-size:10.5px;font-weight:600;color:var(--ink-3)}
+.step.bad .dot{border-color:var(--warn);color:var(--warn);background:var(--warn-soft)}
+.step h4{font-family:var(--display)}
+.step .what{color:var(--ink-2);font-size:15.5px;max-width:62ch}
+.flaw{display:inline-flex;gap:8px;margin-top:4px;background:var(--warn-soft);border-left:2.5px solid var(--warn);padding:8px 12px;border-radius:0 6px 6px 0;max-width:62ch}
+.flaw span{font-family:var(--display);font-size:14px;line-height:1.45;color:var(--ink)}
+.flaw b{color:var(--warn);font-weight:700}
+
+code.ev{font-family:var(--mono);font-size:12.5px;background:var(--surface);border:1px solid var(--rule-soft);border-radius:4px;padding:1px 6px;color:var(--ink-2);overflow-wrap:anywhere}
+.evbox{font-family:var(--mono);font-size:12.5px;line-height:1.75;background:var(--surface);border:1px solid var(--rule);border-radius:8px;padding:14px 16px;color:var(--ink-2);overflow-x:auto;margin-top:10px;max-width:100%}
+.evbox .k{color:var(--warn);font-weight:600}
+.evbox .g{color:var(--deep);font-weight:600}
+
+/* ---- JTBD ---- */
+.method{background:var(--surface);border:1px solid var(--rule);border-radius:10px;padding:15px 17px;margin-bottom:28px;max-width:70ch}
+.method .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--deep);display:block;margin-bottom:6px}
+.method p{font-size:15px;line-height:1.55;color:var(--ink-2)}
+
+.segs{display:flex;flex-direction:column;gap:18px}
+.seg{border:1px solid var(--rule);border-radius:12px;overflow:hidden;background:var(--surface)}
+.seg-top{padding:16px 18px 14px;border-bottom:1px solid var(--rule-soft);display:flex;flex-direction:column;gap:7px}
+.seg-top .who{font-family:var(--mono);font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--route)}
+.seg-top h3{font-family:var(--display)}
+.bigjob{font-family:var(--display);font-size:15px;line-height:1.45;color:var(--ink)}
+.bigjob b{color:var(--deep);font-weight:700}
+.jobs{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1px;background:var(--rule-soft)}
+.job{background:var(--surface);padding:15px 18px;display:flex;flex-direction:column;gap:9px}
+.job .jt{font-family:var(--display);font-size:14px;font-weight:700}
+.jrow{display:grid;grid-template-columns:54px minmax(0,1fr);gap:10px;align-items:start}
+.jrow .l{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);padding-top:3px}
+.jrow .v{font-family:var(--display);font-size:13.5px;line-height:1.45;color:var(--ink-2)}
+.jrow .v em{font-style:normal;color:var(--ink);font-weight:600}
+.crit{font-family:var(--mono);font-size:11.5px;line-height:1.6;color:var(--deep);background:var(--deep-soft);border-radius:6px;padding:7px 10px}
+.seg-quotes{padding:14px 18px 16px;display:flex;flex-direction:column;gap:7px;background:var(--surface-2)}
+.seg-quotes .qh{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.seg-quotes q{font-family:var(--body);font-size:14px;line-height:1.5;color:var(--ink-2);display:block}
+.seg-quotes q::before{content:"\201C"}
+.seg-quotes q::after{content:"\201D"}
+
+.trialjob{border:2px solid var(--route);border-radius:12px;padding:20px 22px;margin-top:30px;display:flex;flex-direction:column;gap:12px;background:var(--surface)}
+.trialjob .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--route)}
+.trialjob h3{font-family:var(--display)}
+.trialjob .jrow .v{font-size:15px;color:var(--ink)}
+
+/* ---- diagnosis ---- */
+.thesis{border-left:3px solid var(--route);padding:4px 0 4px 20px;margin-block:6px 30px;font-family:var(--display);font-size:clamp(19px,2.6vw,25px);line-height:1.34;font-weight:600;max-width:34ch}
+.probs{display:grid;grid-template-columns:repeat(auto-fit,minmax(248px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:10px;overflow:hidden}
+.prob{background:var(--surface);padding:18px 18px 20px;display:flex;flex-direction:column;gap:8px}
+.prob .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--route)}
+.prob h4{font-family:var(--display)}
+.prob p{font-size:14.5px;line-height:1.55;color:var(--ink-2)}
+.ratio{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;margin-top:26px;background:var(--deep-soft);border-radius:10px;padding:16px 18px}
+.ratio .big{font-family:var(--display);font-weight:900;font-size:34px;letter-spacing:-.03em;color:var(--deep);font-variant-numeric:tabular-nums}
+.ratio p{font-family:var(--display);font-size:14.5px;line-height:1.45;color:var(--ink);max-width:44ch}
+
+/* ---- prototype ---- */
+.proto-wrap{display:grid;grid-template-columns:minmax(0,320px) minmax(0,1fr);gap:clamp(22px,4vw,48px);align-items:start}
+@media(max-width:820px){.proto-wrap{grid-template-columns:1fr}}
+.phone{width:100%;max-width:320px;margin-inline:auto;background:var(--ink);border-radius:32px;padding:9px;box-shadow:0 18px 44px -20px rgba(0,0,0,.55);position:sticky;top:calc(env(safe-area-inset-top,0px) + 68px)}
+@media(max-width:820px){.phone{position:static}}
+.screen{background:var(--surface);border-radius:24px;overflow:hidden;height:548px;display:flex;flex-direction:column;position:relative}
+.scr{display:none;flex-direction:column;height:100%;animation:fade .28s ease}
+.scr.on{display:flex}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@media(prefers-reduced-motion:reduce){.scr{animation:none}}
+.scr-top{padding:10px 14px;display:flex;align-items:center;justify-content:space-between;gap:8px;border-bottom:1px solid var(--rule-soft);flex:0 0 auto}
+.scr-top .mono{font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3)}
+.scr-main{flex:1 1 auto;overflow-y:auto;padding:16px 16px 4px;display:flex;flex-direction:column;gap:12px}
+.scr-foot{flex:0 0 auto;padding:12px 14px 16px;display:flex;flex-direction:column;gap:8px}
+
+.btn{font-family:var(--display);font-size:14px;font-weight:600;background:var(--route);color:#fff;border:0;border-radius:999px;padding:12px 16px;cursor:pointer;width:100%;text-align:center;line-height:1.25}
+.btn:hover{filter:brightness(1.06)}
+.btn.ghost{background:transparent;color:var(--ink-2);border:1px solid var(--rule)}
+.btn.dark{background:var(--deep)}
+.btn:focus-visible,.themebtn:focus-visible,.chip:focus-visible{outline:2px solid var(--route);outline-offset:2px}
+.microcopy{font-family:var(--display);font-size:11px;color:var(--ink-3);text-align:center;line-height:1.35}
+
+.panel{border:1px solid var(--rule);border-radius:10px;overflow:hidden;background:var(--surface-2)}
+.panel svg{display:block;width:100%;height:auto}
+.bubble{font-family:var(--display);font-size:12.5px;line-height:1.42;background:var(--surface);border:1px solid var(--rule);border-radius:12px;padding:9px 12px;color:var(--ink)}
+.bubble.paw{border-color:var(--route);background:var(--route-soft)}
+.bubble .who{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--route);margin-bottom:3px}
+.scr h5{font-family:var(--display);font-size:19px;font-weight:800;letter-spacing:-.015em;line-height:1.15;margin:0}
+.scr .sm{font-family:var(--display);font-size:12.5px;line-height:1.45;color:var(--ink-2)}
+
+.dest{border:1px solid var(--route);background:var(--route-soft);border-radius:12px;padding:13px 14px;display:flex;flex-direction:column;gap:7px}
+.dest .name{font-family:var(--display);font-size:14px;font-weight:700}
+.bar{height:7px;border-radius:99px;background:var(--surface);overflow:hidden;border:1px solid var(--rule)}
+.bar i{display:block;height:100%;background:var(--route);border-radius:99px;transition:width .7s ease}
+@media(prefers-reduced-motion:reduce){.bar i{transition:none}}
+.dest .nums{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;color:var(--ink-2);font-variant-numeric:tabular-nums}
+
+.stepper{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--surface-2);border-radius:12px;padding:10px 12px}
+.stepper button{width:36px;height:36px;border-radius:50%;border:1px solid var(--rule);background:var(--surface);font-size:19px;line-height:1;color:var(--ink);cursor:pointer;font-family:var(--display)}
+.stepper .v{font-family:var(--display);font-weight:800;font-size:24px;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.stepper .v small{font-size:12px;font-weight:500;color:var(--ink-3);margin-left:3px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-family:var(--display);font-size:11.5px;line-height:1.25;background:var(--surface-2);border:1px solid var(--rule);border-radius:999px;padding:7px 11px;color:var(--ink-2);cursor:pointer}
+.chip:hover{border-color:var(--route);color:var(--ink)}
+
+.nightbreak{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.nightbreak::before,.nightbreak::after{content:"";flex:1;height:1px;background:var(--rule)}
+.push{background:var(--surface-2);border:1px solid var(--rule);border-radius:12px;padding:10px 12px;display:flex;flex-direction:column;gap:3px}
+.push .app{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.push .txt{font-family:var(--display);font-size:12.5px;line-height:1.4}
+
+.card{border:1px solid var(--rule);border-radius:12px;overflow:hidden;background:var(--surface-2)}
+.card svg{display:block;width:100%;height:auto}
+.cardmeta{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 11px;border-top:1px solid var(--rule);font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+
+.priceblock{border:1.5px solid var(--route);border-radius:14px;padding:13px 14px;display:flex;flex-direction:column;gap:6px;background:var(--surface)}
+.priceblock .row{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.priceblock .p{font-family:var(--display);font-weight:900;font-size:26px;letter-spacing:-.03em;color:var(--route)}
+.priceblock .w{font-family:var(--display);font-size:12.5px;line-height:1.4;font-weight:600}
+.priceblock .n{font-family:var(--display);font-size:11.5px;color:var(--ink-2);line-height:1.4}
+.locks{display:flex;gap:5px;flex-wrap:wrap}
+.locks i{width:21px;height:21px;border-radius:50%;background:var(--surface-2);border:1px solid var(--rule);display:grid;place-items:center;font-family:var(--mono);font-style:normal;font-size:9px;color:var(--ink-3)}
+.locks i.on{background:var(--route);border-color:var(--route);color:#fff}
+
+.proto-notes{display:flex;flex-direction:column;gap:14px}
+.note{border-left:2px solid var(--rule);padding-left:16px;display:none;flex-direction:column;gap:7px}
+.note.on{display:flex;animation:fade .3s ease}
+.note .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--deep)}
+.note h4{font-family:var(--display)}
+.note p{font-size:15px;line-height:1.55;color:var(--ink-2);max-width:56ch}
+.note .was,.note .job{font-family:var(--mono);font-size:12.5px;border-radius:6px;padding:8px 11px;max-width:56ch;line-height:1.6}
+.note .was{color:var(--ink-3);background:var(--surface);border:1px dashed var(--rule)}
+.note .job{color:var(--ink-2);background:var(--deep-soft);border:1px solid transparent}
+.note .was b,.note .job b{font-weight:600;font-family:var(--display);font-size:11px;letter-spacing:.06em;text-transform:uppercase;display:block;margin-bottom:3px}
+.note .was b{color:var(--warn)}
+.note .job b{color:var(--deep)}
+
+.protobar{display:flex;align-items:center;gap:10px;margin-bottom:18px;flex-wrap:wrap}
+.pips{display:flex;gap:4px;flex:1;min-width:120px}
+.pips i{flex:1;height:3px;border-radius:2px;background:var(--rule);transition:background .25s}
+.pips i.on{background:var(--route)}
+.protobar .mono{font-size:11px;color:var(--ink-3);letter-spacing:.08em;white-space:nowrap}
+.resetbtn{font-family:var(--mono);font-size:11px;background:none;border:0;color:var(--ink-3);cursor:pointer;text-decoration:underline;padding:4px}
+
+.tablewrap{overflow-x:auto;border:1px solid var(--rule);border-radius:10px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:600px;font-family:var(--display);font-size:14.5px}
+th,td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--rule-soft);vertical-align:top}
+th{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);font-weight:500;white-space:nowrap}
+td.n{font-family:var(--mono);font-variant-numeric:tabular-nums;text-align:right;width:1%;white-space:nowrap}
+td.verdict{white-space:nowrap;font-family:var(--mono);font-size:11.5px;letter-spacing:.04em}
+td.verdict.no{color:var(--warn)}
+td.verdict.mid{color:var(--ink-3)}
+td.verdict.anti{color:var(--warn);font-weight:600}
+tr:last-child td{border-bottom:0}
+tr.total td{font-weight:700;background:var(--surface-2)}
+tr.total td.n{color:var(--route)}
+.delta{font-family:var(--mono);font-size:12px;color:var(--deep)}
+
+.backlog{display:flex;flex-direction:column;gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:10px;overflow:hidden}
+.item{background:var(--surface);padding:15px 16px;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;align-items:start}
+@media(max-width:620px){.item{grid-template-columns:auto minmax(0,1fr)}.item .cost{grid-column:2;justify-self:start}}
+.item .w{font-family:var(--mono);font-size:10.5px;font-weight:600;width:26px;height:26px;border-radius:6px;display:grid;place-items:center;background:var(--surface-2);color:var(--ink-3);margin-top:2px}
+.item.p1 .w{background:var(--route);color:#fff}
+.item.p2 .w{background:var(--deep);color:#fff}
+.item h4{font-family:var(--display);margin-bottom:3px}
+.item p{font-size:14.5px;color:var(--ink-2);line-height:1.5}
+.cost{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);white-space:nowrap;padding-top:4px}
+
+.caveat{background:var(--surface);border:1px solid var(--rule);border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:8px;margin-top:24px;max-width:66ch}
+.caveat .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--warn)}
+.caveat p{font-size:15px;line-height:1.55;color:var(--ink-2)}
+
+footer{padding-block:40px 60px;color:var(--ink-3);font-family:var(--mono);font-size:11.5px;line-height:1.8}
+.themebtn{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;background:none;border:1px solid var(--rule);border-radius:99px;padding:5px 11px;color:var(--ink-2);cursor:pointer}
+</style>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <strong>Amazonia Route / триал</strong>
+    <button class="themebtn" id="theme" type="button">тема</button>
+  </div>
+</div>
+
+<div class="shell">
+
+  <header class="hero">
+    <div class="hero-grid">
+      <div>
+        <p class="eyebrow">Разбор, работы клиента и редизайн демо-версии · MyFinishLine</p>
+        <h1>Первые два дня Amazonia</h1>
+        <p class="lead">Триал продаёт 120 километров, а даёт потрогать форму ввода. Покупку решает не длина демо, а то, случился ли в нём момент «я прошёл - и мир сдвинулся».</p>
+      </div>
+      <div class="scoreboard">
+        <div class="score-row now"><span class="score-val">15</span><span class="score-lbl">сейчас</span><span class="score-note">из 100 зашедших в демо</span></div>
+        <div class="score-row fix"><span class="score-val">~30</span><span class="score-lbl">починить триал</span><span class="score-note">баги, онбординг, структура демо</span></div>
+        <div class="score-row offer"><span class="score-val">~45</span><span class="score-lbl">+ поменять оффер</span><span class="score-note">цена, оплата, догоняющая серия</span></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- 1 -->
+  <section>
+    <div class="sec-head">
+      <div class="sec-num">1</div>
+      <div>
+        <h2>Что происходит с пользователем сейчас</h2>
+        <p class="sub">Прошёл демку целиком под живым аккаунтом: регистрация, онбординг, первая глава, контракт, ручной ввод тренировки, конец триала, пейволл. Ниже - маршрут как есть, с тем, что на нём ломается.</p>
+      </div>
+    </div>
+    <div class="sec-body">
+      <div class="spacer"></div>
+      <div>
+        <ol class="route">
+          <li class="step">
+            <span class="dot">1</span>
+            <h4>Ссылка из рекламы: <code class="ev">/amazonia-demo</code></h4>
+            <p class="what">Открывается обычная главная страница. Отдельной посадочной под демо нет - тот же герой, тот же блок «How it works», тот же футер, что и для холодного трафика.</p>
+          </li>
+          <li class="step bad">
+            <span class="dot">2</span>
+            <h4>Кнопка «Try Free Demo» ведёт на регистрацию</h4>
+            <p class="what">Email плюс чекбокс лицензии, либо вход через Strava или Google Health. До первого кадра игры не показано ничего.</p>
+            <div class="flaw"><span><b>Стена до ценности.</b> Человек платит персональными данными за право узнать, стоит ли оно того.</span></div>
+          </li>
+          <li class="step bad">
+            <span class="dot">3</span>
+            <h4>Первый экран приложения: «Welcome. Let's walk through the platform and its guidelines»</h4>
+            <p class="what">Кнопка «Start Tour». Первое слово, которым сюжетный квест встречает игрока, - «платформа», второе - «гайдлайны».</p>
+            <div class="flaw"><span><b>Тур по интерфейсу вместо начала истории.</b> Это экран из админки, а не из игры.</span></div>
+          </li>
+          <li class="step bad">
+            <span class="dot">4</span>
+            <h4>Тур заблокирован ложной ошибкой «offline»</h4>
+            <p class="what">При каждой загрузке приложение выстреливает около тридцати одинаковых проверок связи меньше чем за секунду. Половина возвращает 503 - сервер режет собственный клиент. Приложение трактует 503 как «нет сети» и отказывается открывать онбординг.</p>
+            <div class="evbox">GET /api/user?mfl_online_check=1&amp;t=1789991870974 <span class="g">200</span><br>
+GET /api/user?mfl_online_check=1&amp;t=1789991870977 <span class="g">200</span><br>
+<span style="opacity:.55">... 30 запросов за 988 мс ...</span><br>
+GET /api/user?mfl_online_check=1&amp;t=1789991871390 <span class="k">503</span><br>
+GET /api/user?mfl_online_check=1&amp;t=1789991871402 <span class="k">503</span><br><br>
+→ «Quest tour is unavailable while offline»<br>
+<span style="opacity:.6">воспроизводится на каждой перезагрузке, navigator.onLine = true</span></div>
+            <div class="flaw"><span><b>Продакшн-блокер на первом экране триала.</b> Не «иногда тормозит», а стабильно закрытая дверь в первые тридцать секунд.</span></div>
+          </li>
+          <li class="step bad">
+            <span class="dot">5</span>
+            <h4>13 слайдов сторис-онбординга</h4>
+            <p class="what">Автопролистывание. Пять из тринадцати - инструкции по интерфейсу: как подключить трекер, что считается активностью, как завести тренировку руками, как добавить сайт на домашний экран, как включить напоминания. Мелкие скриншоты настроек, нечитаемые на телефоне.</p>
+            <div class="flaw"><span><b>Картинки не успевают за таймером.</b> Слайды через один остаются чёрными со спиннером, внизу висит «Story loaded partially / Retry».</span></div>
+          </li>
+          <li class="step bad">
+            <span class="dot">6</span>
+            <h4>Онбординг заканчивается там же, где начался</h4>
+            <p class="what">После тринадцати слайдов пользователь возвращается на экран «Your quest is ready» с кнопкой «Start Quest» - на ту самую кнопку, которую он уже нажал три минуты назад.</p>
+            <div class="flaw"><span><b>Петля.</b> Три минуты потрачено, состояние прежнее.</span></div>
+          </li>
+          <li class="step">
+            <span class="dot">7</span>
+            <h4>Карта. DEMO 5,0 км / FULL JOURNEY 120,0 км</h4>
+            <p class="what">Двадцать одна точка маршрута, открыта одна. Таймер «TIME IN JOURNEY» считает вверх - сколько ты уже здесь. В правом верхнем углу сразу висит «Upgrade Plan».</p>
+          </li>
+          <li class="step">
+            <span class="dot">8</span>
+            <h4>Глава 1 - и она хорошая</h4>
+            <p class="what">Комикс на два десятка кадров: герой находит за плинтусом чужой дневник 1926 года, ему звонят из несуществующего турагентства, билет в один конец до Сантьяго, в порту к нему прибивается говорящий енот Paw. Рисунок и интонация работают. Глава обрывается на том, что Paw обещает рассказать самое интересное позже.</p>
+            <div class="flaw"><span><b>Перед первым кадром - три подсказки подряд</b> про звук, про тап вправо и про кнопку «Skip». Дальше по демо их ещё шесть.</span></div>
+          </li>
+          <li class="step bad">
+            <span class="dot">9</span>
+            <h4>Первый контракт - это путь по меню</h4>
+            <p class="what">Текст задания дословно: <code class="ev">Go to Profile → Activities to log your first activity</code>. Так же написаны и остальные двадцать контрактов - условие плюс одна и та же приписка про Quick Guide и 24 часа. Названия («Champion», «Night Shift», «Early Bird») к Амазонии отношения не имеют.</p>
+            <div class="flaw"><span><b>Обещали «bold side quests woven into the adventure», выдали список условий трекера.</b></span></div>
+          </li>
+          <li class="step bad">
+            <span class="dot">10</span>
+            <h4>Форма ручного ввода падает на своих же значениях</h4>
+            <p class="what">Восемь полей. Форма подставляет местное время, а сервер сверяет с UTC.</p>
+            <div class="evbox"><span class="k">The start date field must be a date before or equal to now.</span><br><span style="opacity:.6">дефолтные значения формы, ничего не менял. Поле «название» при этом очищается</span></div>
+            <div class="flaw"><span><b>Любой пользователь восточнее Гринвича упирается в ошибку на первой же попытке</b> сделать то единственное действие, ради которого существует демо.</span></div>
+          </li>
+          <li class="step bad">
+            <span class="dot">11</span>
+            <h4>Момент максимального интереса занят просьбой позвать друга</h4>
+            <p class="what">Пять километров засчитаны, демо исчерпано. Вместо этого поверх карты открывается «You've started your journey. Invite someone to walk it with you».</p>
+            <div class="flaw"><span><b>Реферальный попап там, где должна быть продажа.</b></span></div>
+          </li>
+          <li class="step bad">
+            <span class="dot">12</span>
+            <h4>Пейволл: «Trial Period Ended»</h4>
+            <p class="what">Заголовок про окончание пробного периода, под ним «115 km to the medal» и четыре пункта списка возможностей. Цены на экране нет.</p>
+            <div class="flaw"><span><b>Первое, что человек слышит после первых пяти километров, - что осталось сто пятнадцать.</b> Продаётся не история, а объём невыполненной работы.</span></div>
+          </li>
+          <li class="step bad">
+            <span class="dot">13</span>
+            <h4>Кнопка покупки выбрасывает из игры</h4>
+            <p class="what">«Buy Quest &amp; continue the journey» уводит на маркетинговый сайт: три тарифа, два допа, таблица сравнения и FAQ на десять вопросов. Дальше по их же инструкции - письмо с шестизначным кодом, возврат в приложение и активация.</p>
+            <div class="flaw"><span><b>Шесть шагов и две смены контекста</b> между «хочу узнать, что дальше» и «купил».</span></div>
+          </li>
+          <li class="step bad">
+            <span class="dot">14</span>
+            <h4>Вкладка «Rating» показывает, что продукт пустой</h4>
+            <p class="what">Весь лидерборд - шестнадцать строк. Среди них аккаунт <code class="ev">apple_review</code> и дважды одно и то же имя.</p>
+            <div class="flaw"><span><b>Экран социального доказательства доказывает обратное.</b></span></div>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 JTBD -->
+  <section>
+    <div class="sec-head">
+      <div class="sec-num">2</div>
+      <div>
+        <h2>Кого мы теряем: работы и сегменты</h2>
+        <p class="sub">Разбор по AJTBD. Сегментируем по работам, а не по демографии; работа - это результат в контексте, а не требование к интерфейсу.</p>
+      </div>
+    </div>
+    <div class="sec-body">
+      <div class="spacer"></div>
+      <div>
+
+        <div class="method">
+          <span class="tag">Откуда взяты работы</span>
+          <p>У самой MyFinishLine отзывов практически нет - продукт слишком маленький, весь лидерборд шестнадцать строк. Поэтому база - отзывы категории: The Conqueror (около 5 100 отзывов на Trustpilot плюс App Store), место, откуда к MyFinishLine и приходит трафик. Пространство работ то же самое: те же виртуальные километры, та же медаль в конце, те же трекеры. Все цитаты ниже - настоящие, из этих отзывов.</p>
+        </div>
+
+        <div class="segs">
+
+          <article class="seg">
+            <div class="seg-top">
+              <span class="who">Сегмент 1 · самый крупный</span>
+              <h3>Придающие смысл тому, что и так делают</h3>
+              <p class="bigjob"><b>Big Job:</b> хочу не бросить двигаться регулярно</p>
+            </div>
+            <div class="jobs">
+              <div class="job">
+                <span class="jt">Core Job 1</span>
+                <div class="jrow"><span class="l">Когда</span><span class="v">Хожу или бегаю и так, но это давно перестало быть событием. <em>Триггер:</em> поймал себя на том, что третий день ищу повод не выходить. <em>До:</em> скучно, бессмысленно, ощущение топтания на месте.</span></div>
+                <div class="jrow"><span class="l">Хочу</span><span class="v"><em>превращать уже сделанное движение в видимый прогресс</em></span></div>
+                <div class="jrow"><span class="l">Чтобы</span><span class="v">не бросить; чувствовать, что сегодняшняя прогулка куда-то ведёт</span></div>
+                <div class="crit">Критерии: прогресс виден в тот же день · ничего не надо делать сверх обычной тренировки · пропуск дня ничего не обнуляет</div>
+              </div>
+              <div class="job">
+                <span class="jt">Core Job 2</span>
+                <div class="jrow"><span class="l">Когда</span><span class="v">Вечер, погода дрянь, выходить не хочется. <em>Триггер:</em> открыл телефон вместо кроссовок. <em>До:</em> вина, «опять завтра».</span></div>
+                <div class="jrow"><span class="l">Хочу</span><span class="v"><em>получить внешнюю причину выйти именно сегодня</em></span></div>
+                <div class="jrow"><span class="l">Чтобы</span><span class="v">сохранить ритм; вечером быть довольным собой, а не виноватым</span></div>
+                <div class="crit">Критерии: причина конкретная и близкая · её даёт кто-то, а не я сам себе</div>
+              </div>
+            </div>
+            <div class="seg-quotes">
+              <span class="qh">Из отзывов</span>
+              <q>I would be doing these miles anyway - but doing them as part of a Challenge enriches the experience</q>
+              <q>I needed more motivation to continue going to the gym and just moving more in general</q>
+              <q>Bored with 3-mile daily walks; now does 10 miles a day</q>
+              <q>I can't explain why but Conquer motivates me in ways other programs don't</q>
+            </div>
+          </article>
+
+          <article class="seg">
+            <div class="seg-top">
+              <span class="who">Сегмент 2</span>
+              <h3>Кресельные путешественники</h3>
+              <p class="bigjob"><b>Big Job:</b> хочу проживать путешествие, никуда не уезжая</p>
+            </div>
+            <div class="jobs">
+              <div class="job">
+                <span class="jt">Core Job 1</span>
+                <div class="jrow"><span class="l">Когда</span><span class="v">Поездок нет и не предвидится - деньги, работа, здоровье. <em>Триггер:</em> увидел маршрут по местам, где был или мечтал побывать. <em>До:</em> тоска, ощущение запертости.</span></div>
+                <div class="jrow"><span class="l">Хочу</span><span class="v"><em>оказываться в настоящем месте и узнавать про него</em></span></div>
+                <div class="jrow"><span class="l">Чтобы</span><span class="v">получать впечатление, а не только нагрузку; чувствовать себя в пути</span></div>
+                <div class="crit">Критерии: место опознаваемое и настоящее · на каждой вехе есть что рассмотреть или прочитать</div>
+              </div>
+              <div class="job">
+                <span class="jt">Core Job 2</span>
+                <div class="jrow"><span class="l">Когда</span><span class="v">Между вехами длинный перегон, ничего не происходит. <em>Триггер:</em> открыл карту и не понял, изменилось ли хоть что-то. <em>До:</em> разочарование, интерес гаснет.</span></div>
+                <div class="jrow"><span class="l">Хочу</span><span class="v"><em>видеть, где именно я сейчас и что будет следующим</em></span></div>
+                <div class="jrow"><span class="l">Чтобы</span><span class="v">сохранять предвкушение между тренировками</span></div>
+                <div class="crit">Критерии: следующая точка близко и названа · видно, сколько до неё осталось</div>
+              </div>
+            </div>
+            <div class="seg-quotes">
+              <span class="qh">Из отзывов</span>
+              <q>The next best thing to being there</q>
+              <q>Reliving previous travels - Mt. Fuji, St. Francis Way, Road to Hana</q>
+              <q>Wants sub-milestone markers between attractions, especially 200+ mile gaps</q>
+              <q>Turning those runs into progress against the Death Star made a world of difference</q>
+            </div>
+          </article>
+
+          <article class="seg">
+            <div class="seg-top">
+              <span class="who">Сегмент 3 · платит больше всех</span>
+              <h3>Коллекционеры доказательств</h3>
+              <p class="bigjob"><b>Big Job:</b> хочу иметь материальное подтверждение того, что я это сделал</p>
+            </div>
+            <div class="jobs">
+              <div class="job">
+                <span class="jt">Core Job 1</span>
+                <div class="jrow"><span class="l">Когда</span><span class="v">Усилие закончилось, а следа не осталось - цифры в приложении и всё. <em>Триггер:</em> увидел у знакомого медаль на стене. <em>До:</em> обидно, что никто не видит.</span></div>
+                <div class="jrow"><span class="l">Хочу</span><span class="v"><em>получить вещь, которую можно поставить на видное место и показать</em></span></div>
+                <div class="jrow"><span class="l">Чтобы</span><span class="v">усилие стало осязаемым; гордиться и иметь повод рассказать</span></div>
+                <div class="crit">Критерии: вещь качественная · её видно в комнате · про неё спрашивают</div>
+              </div>
+              <div class="job">
+                <span class="jt">Core Job 2</span>
+                <div class="jrow"><span class="l">Когда</span><span class="v">Один маршрут закончен. <em>Триггер:</em> в профиле образовалась дырка в коллекции. <em>До:</em> незавершённость.</span></div>
+                <div class="jrow"><span class="l">Хочу</span><span class="v"><em>копить серию, а не разовый результат</em></span></div>
+                <div class="jrow"><span class="l">Чтобы</span><span class="v">видеть накопленное; покупать следующий маршрут не думая</span></div>
+                <div class="crit">Критерии: видно, сколько собрано из скольких · ясно, что будет следующим</div>
+              </div>
+            </div>
+            <div class="seg-quotes">
+              <span class="qh">Из отзывов</span>
+              <q>Medals displayed in office</q>
+              <q>It looked like fun with cool medals to work as a goal towards to get back in shape</q>
+              <q>Completed 6 challenges; got sister to join</q>
+              <q>Tip: buy the Plus 3 option for savings</q>
+            </div>
+          </article>
+
+          <article class="seg">
+            <div class="seg-top">
+              <span class="who">Сегмент 4 · заявленный целевым в их же FAQ</span>
+              <h3>Возвращающиеся в тело</h3>
+              <p class="bigjob"><b>Big Job:</b> хочу вернуться к движению после паузы, болезни или травмы, ни с кем не соревнуясь</p>
+            </div>
+            <div class="jobs">
+              <div class="job">
+                <span class="jt">Core Job 1</span>
+                <div class="jrow"><span class="l">Когда</span><span class="v">После операции, травмы или долгого перерыва. <em>Триггер:</em> врач или самочувствие сказали «надо двигаться». <em>До:</em> страх не потянуть, стыд за свою форму.</span></div>
+                <div class="jrow"><span class="l">Хочу</span><span class="v"><em>чтобы мой темп считался нормальным результатом</em></span></div>
+                <div class="jrow"><span class="l">Чтобы</span><span class="v">продолжать, а не бросить на второй неделе; чувствовать себя участником, а не отстающим</span></div>
+                <div class="crit">Критерии: ходьба засчитывается наравне · нет обязательных соревнований · никто не подгоняет дедлайном</div>
+              </div>
+              <div class="job">
+                <span class="jt">Core Job 2</span>
+                <div class="jrow"><span class="l">Когда</span><span class="v">Приложение показало рейтинг. <em>Триггер:</em> увидел себя в конце списка. <em>До:</em> унижение, желание закрыть.</span></div>
+                <div class="jrow"><span class="l">Хочу</span><span class="v"><em>не сравниваться с теми, кто быстрее</em></span></div>
+                <div class="jrow"><span class="l">Чтобы</span><span class="v">сохранить желание открывать приложение</span></div>
+                <div class="crit">Критерии: соревнование строго по желанию · по умолчанию его не видно</div>
+              </div>
+            </div>
+            <div class="seg-quotes">
+              <span class="qh">Из отзывов</span>
+              <q>Senior, retired librarian, not athletic at all - completed 6 challenges</q>
+              <q>This year I've had to have a few major abdominal surgeries and my endurance and energy really took a hit</q>
+              <q>Marine Corps vet with knee and back injuries from service</q>
+              <q>74 years old; completed 6 missions last year</q>
+            </div>
+          </article>
+
+        </div>
+
+        <div class="trialjob">
+          <span class="tag">Работа самого триала - она другая, чем у продукта</span>
+          <h3>За что человек «нанимает» демо</h3>
+          <div class="jrow"><span class="l">Когда</span><span class="v">Пришёл по рекламе, о продукте слышит впервые, компания незнакомая и явно небольшая, а заплатить надо вперёд за вещь, которая приедет через месяцы. Уже пробовал фитнес-приложения и бросал. <em>Триггер:</em> увидел «Try Free Demo» - предложение не рисковать. <em>До:</em> скепсис («это просто трекер с картинками»), недоверие к себе («опять заброшу»), страх выкинуть деньги.</span></div>
+          <div class="jrow"><span class="l">Хочу</span><span class="v"><em>убедиться, что мои настоящие тренировки правда во что-то превращаются, и что мне захочется это продолжать</em></span></div>
+          <div class="jrow"><span class="l">Чтобы</span><span class="v">решиться заплатить, не пожалев; войти в покупку с предвкушением, а не с чувством взятого на себя обязательства</span></div>
+          <div class="crit">Критерии успеха: увидел, как моё собственное движение сдвинуло сюжет · понял, сколько это займёт лично у меня · мне интересно, что дальше</div>
+        </div>
+
+        <h3 style="margin-top:36px;margin-bottom:14px">Что демо даёт каждому сегменту сейчас</h3>
+        <div class="tablewrap">
+          <table>
+            <thead><tr><th>Сегмент</th><th>Что должен доказать триал</th><th>Что даёт сейчас</th><th>Итог</th></tr></thead>
+            <tbody>
+              <tr>
+                <td>Придающие смысл рутине</td>
+                <td>Что вчерашняя реальная тренировка засчитывается сама</td>
+                <td>Форму на восемь полей, которая падает на своих дефолтах</td>
+                <td class="verdict no">не нанимают</td>
+              </tr>
+              <tr>
+                <td>Кресельные путешественники</td>
+                <td>Место, в котором хочется задержаться</td>
+                <td>Две главы: квартира и порт в Чили. Амазонии в демо нет ни одного кадра</td>
+                <td class="verdict mid">половина работы</td>
+              </tr>
+              <tr>
+                <td>Коллекционеры</td>
+                <td>Предмет в руках и видимую серию</td>
+                <td>Коробку - строчкой в списке возможностей на пейволле</td>
+                <td class="verdict no">не нанимают</td>
+              </tr>
+              <tr>
+                <td>Возвращающиеся в тело</td>
+                <td>Что их темп - нормальный</td>
+                <td>Вкладку «Rating» в главном меню с лидербордом из 16 строк</td>
+                <td class="verdict anti">отталкивает</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="prose" style="margin-top:28px">
+          <p><strong>Самое неприятное в этой таблице - вторая строка.</strong> Маршрут называется Amazonia Route, реклама продаёт джунгли, коробка обещает амазонскую медаль. Демо целиком происходит в европейской квартире и в чилийском порту. Человек, который «нанимает» продукт ради места, за весь триал это место не видит.</p>
+          <p><strong>Четвёртая строка - прямое противоречие самим себе.</strong> В их же FAQ написано, что продукт про «soft, pressure-free experience» без обязательных соревнований. При этом рейтинг стоит первым пунктом главного меню и показывается человеку на второй минуте знакомства.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section>
+    <div class="sec-head">
+      <div class="sec-num">3</div>
+      <div>
+        <h2>Диагноз</h2>
+        <p class="sub">Багов много, и их надо чинить. Но даже в идеально работающей версии этот триал конвертировал бы плохо, потому что он устроен неправильно по существу.</p>
+      </div>
+    </div>
+    <div class="sec-body">
+      <div class="spacer"></div>
+      <div>
+        <p class="thesis">Магия продукта в том, что ты тренируешься в реальной жизни, а сюжет двигается сам. Демо ни разу не даёт этого почувствовать: единственное «движение» за весь триал - цифра, вписанная в форму.</p>
+
+        <div class="probs">
+          <div class="prob"><span class="tag">Структура</span><h4>Демо - это кусок, а не история</h4><p>5 км из 120 - четыре процента продукта. Всё демо проходится за одну сессию, не вставая с дивана. Человек решает про покупку, ни разу не испытав того, что покупает.</p></div>
+          <div class="prob"><span class="tag">Валюта</span><h4>Продают то, что выдают в долг</h4><p>Дистанция - одновременно и товар, и единица триала. Поэтому каждый экран напоминает про недостающие 96%, а пейволл открывается фразой про 115 оставшихся километров.</p></div>
+          <div class="prob"><span class="tag">Баланс</span><h4>Инструкции задавили историю</h4><p>До первого кадра сюжета - 13 слайдов туториала и 3 подсказки. За весь триал около 25 обучающих касаний против двух глав контента.</p></div>
+          <div class="prob"><span class="tag">Место</span><h4>Амазонию в демо не показывают</h4><p>Обе демо-главы происходят в квартире и в порту Сан-Антонио. Джунгли, которые продаёт реклама и которые нужны второму сегменту, в триале не появляются.</p></div>
+          <div class="prob"><span class="tag">Драматургия</span><h4>Финал триала не на пике</h4><p>Глава кончается отличным крючком, дальше идут реферальный попап и административный заголовок «Trial Period Ended». Напряжение гасится двумя модалками.</p></div>
+          <div class="prob"><span class="tag">Надёжность</span><h4>Три жёстких стопа за 90 секунд</h4><p>Ложный offline блокирует онбординг, слайды не догружаются, форма падает на своих дефолтах. Это закрытые двери на самом узком месте воронки.</p></div>
+          <div class="prob"><span class="tag">Доверие</span><h4>Нечем подпереть решение</h4><p>На пейволле нет ни цены, ни возврата, ни одного живого человека. Лидерборд из шестнадцати строк работает против покупки и против заявленного сегмента.</p></div>
+          <div class="prob"><span class="tag">Предмет</span><h4>Коллекционеру нечего взять</h4><p>Сегмент, который покупает по три маршрута разом, за весь триал не получает ни одного предмета в коллекцию - только текстовое обещание коробки.</p></div>
+        </div>
+
+        <div class="ratio">
+          <span class="big">25 : 2</span>
+          <p>Обучающих касаний против глав истории за весь триал. В продукте, который продаёт историю.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 -->
+  <section>
+    <div class="sec-head">
+      <div class="sec-num">4</div>
+      <div>
+        <h2>Что я меняю</h2>
+        <p class="sub">Триал перестаёт быть обрезанной версией игры и становится законченной маленькой историей на два дня, которая обрывается там, где хочется дальше. Четыре решения ниже пришли прямо из отзывов и поправили мою первую версию.</p>
+      </div>
+    </div>
+    <div class="sec-body">
+      <div class="spacer"></div>
+      <div class="prose">
+        <p><strong>Играть до регистрации.</strong> Первая глава открывается по клику с лендинга, без почты. Email просят после неё и формулируют как «сохранить прогресс». Регистрируются те, кто уже втянулся, - и это меняет знаменатель: считать конверсию надо от кликов по «Try Free Demo», иначе метрика улучшится сама собой и обманет.</p>
+
+        <p><strong>Демо - это две сессии, а не пять километров.</strong> День первый: глава, крючок, задание выйти и пройти. День второй: человек возвращается с настоящей тренировкой, карта двигается, открывается вторая глава и обрывается на полуслове. Только между этими двумя сессиями возникает то, за что платят.</p>
+
+        <p><strong>Поправка из отзывов: ручной ввод - не запасной путь, а ритуал.</strong> В первой версии я строил магический момент на Strava, а ручной ввод считал деградацией. Отзывы говорят обратное. Синхронизация трекеров - самая частая жалоба в категории (Apple Health, Fitbit, Garmin, двойной подсчёт), и заметная часть людей сознательно переходит на ручной ввод и любит его больше: <q>prefers manual entry for deeper engagement</q>, <q>instant gratification of logging and seeing map position</q>, <q>switched to manual for same-day viewing</q>. Значит момент «мир сдвинулся» нельзя вешать на интеграцию, которая у части людей не заведётся. Ручной путь становится равным и приятным, а Strava - ускорителем для тех, у кого она работает.</p>
+
+        <p><strong>Поправка из отзывов: Амазония должна появиться в демо.</strong> Прямая жалоба на конкурента - <q>wants sub-milestone markers between attractions, especially 200+ mile gaps</q>: людям плохо, когда между вехами пусто. У MyFinishLine хуже: в триале места вообще нет того, ради которого покупают. Демо заканчивается первым кадром джунглей - Paw сходит с судна, и на этом обрыв.</p>
+
+        <p><strong>Поправка из отзывов: коллекционеру нужен предмет сейчас, а не обещание.</strong> На финише демо выдаётся карточка того места, куда человек дошёл, и сразу видно, что в коробку кладут четыре из двадцати таких. Не «твой триал кончился, забери утешительный приз», а «ты пришёл в порт - вот порт». Карточкой можно поделиться: у этого сегмента медали стоят на видном месте, им важно предъявлять.</p>
+
+        <p><strong>Поправка из отзывов: рейтинг убирается из триала.</strong> Не из эстетики, а потому что он бьёт по сегменту, который компания сама назвала целевым в своём FAQ. Возвращающийся в тело человек на второй минуте видит себя шестнадцатым.</p>
+
+        <p><strong>Цель - место, а не процент.</strong> На экране не «5 / 120 км», а «2,1 км до порта Сан-Антонио». Число 120 в триале не показывается: оно появляется один раз, на пейволле, и сразу переведённое в недели по темпу самого игрока.</p>
+
+        <p><strong>Туториал удаляется целиком.</strong> Учим действием: одна подсказка на первом тапе. Трекер предлагаем в момент, когда сюжет просит выйти из дома. «Добавить на домашний экран» и напоминания переезжают за первую тренировку.</p>
+
+        <p><strong>Контракты переписываются в мир игры.</strong> Вместо «Complete any activity and cover at least 2.5 km in a single session» - «Paw ждёт на пирсе до отхода судна. 2,5 км, любым способом». Повторяющаяся приписка про Quick Guide убирается из всех двадцати карточек.</p>
+
+        <p><strong>Покупка не выходит из игры.</strong> Оплата в шторке, Apple Pay и Google Pay, один рекомендованный тариф. Шестизначный код активации выключается - и это тоже из отзывов: <q>purchased challenge codes labeled invalid</q>, <q>credit card charged but no challenge code received</q>. У конкурента это самый частый сюжет в одно- и двухзвёздочных отзывах, а MyFinishLine поставил этот шаг себе во флоу покупки.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 -->
+  <section>
+    <div class="sec-head">
+      <div class="sec-num">5</div>
+      <div>
+        <h2>Прототип нового триала</h2>
+        <p class="sub">Кликабельно. Справа от экрана - что поменялось на этом шаге, чью работу это закрывает и как было. Рисунок условный: это прототип сценария, а не арт.</p>
+      </div>
+    </div>
+    <div class="sec-body">
+      <div class="spacer"></div>
+      <div>
+        <div class="protobar">
+          <div class="pips" id="pips"></div>
+          <span class="mono" id="stepLabel">Шаг 1 из 9</span>
+          <button class="resetbtn" id="reset" type="button">сначала</button>
+        </div>
+
+        <div class="proto-wrap">
+          <div class="phone">
+            <div class="screen" id="screen">
+
+              <!-- 1 -->
+              <div class="scr on" data-s="1">
+                <div class="scr-top"><span class="mono">Amazonia Route</span><span class="mono">без регистрации</span></div>
+                <div class="scr-main">
+                  <div class="panel">
+                    <svg viewBox="0 0 300 168" role="img" aria-label="Раскрытая тетрадь на столе">
+                      <rect width="300" height="168" fill="#2A3A33"/>
+                      <rect x="52" y="34" width="196" height="108" rx="3" fill="#D9CFB6"/>
+                      <rect x="150" y="34" width="2" height="108" fill="#B9AE93"/>
+                      <g stroke="#9B9078" stroke-width="2" stroke-linecap="round">
+                        <path d="M68 58h64M68 70h58M68 82h66M68 94h48"/>
+                        <path d="M168 58h64M168 70h52M168 82h60"/>
+                      </g>
+                      <path d="M168 100h40" stroke="#C94D24" stroke-width="2.5" stroke-linecap="round"/>
+                      <circle cx="150" cy="88" r="46" fill="#F3E4B8" opacity=".12"/>
+                    </svg>
+                  </div>
+                  <h5>Ты нашёл чужой дневник</h5>
+                  <p class="sm">1926 год. Чужой почерк, выцветшие чернила. Одно имя повторяется на каждой странице.</p>
+                </div>
+                <div class="scr-foot">
+                  <button class="btn" data-go="2">Открыть первую страницу</button>
+                  <p class="microcopy">Почта не нужна. Начинай читать.</p>
+                </div>
+              </div>
+
+              <!-- 2 -->
+              <div class="scr" data-s="2">
+                <div class="scr-top"><span class="mono">Глава 1 · Дома</span><span class="mono">1 / 2</span></div>
+                <div class="scr-main">
+                  <div class="panel">
+                    <svg viewBox="0 0 300 120" role="img" aria-label="Комната, окно, телефон в руке">
+                      <rect width="300" height="120" fill="#3A4A42"/>
+                      <rect x="24" y="18" width="94" height="84" rx="2" fill="#8FB3C6"/>
+                      <path d="M71 18v84M24 60h94" stroke="#3A4A42" stroke-width="3"/>
+                      <rect x="150" y="30" width="46" height="76" rx="7" fill="#E4E7E0"/>
+                      <rect x="156" y="40" width="34" height="48" rx="2" fill="#9AA79F"/>
+                      <circle cx="240" cy="66" r="28" fill="#D9CFB6" opacity=".25"/>
+                    </svg>
+                  </div>
+                  <div class="bubble">Звонок с незнакомого номера. Турагентство, о котором ты никогда не слышал, подтверждает билет в один конец до Сантьяго. Оплачен анонимно.</div>
+                  <div class="bubble">Такси приедет через 15 минут.</div>
+                </div>
+                <div class="scr-foot"><button class="btn" data-go="3">Дальше</button></div>
+              </div>
+
+              <!-- 3 -->
+              <div class="scr" data-s="3">
+                <div class="scr-top"><span class="mono">Глава 1 · Чили</span><span class="mono">2 / 2</span></div>
+                <div class="scr-main">
+                  <div class="panel">
+                    <svg viewBox="0 0 300 130" role="img" aria-label="Пирс под дождём, силуэт енота">
+                      <rect width="300" height="130" fill="#5B6B72"/>
+                      <rect y="88" width="300" height="42" fill="#46565C"/>
+                      <rect x="16" y="52" width="120" height="36" fill="#3B4A50"/>
+                      <rect x="150" y="44" width="58" height="44" fill="#3B4A50"/>
+                      <g stroke="#8FA2A8" stroke-width="1.5" opacity=".6"><path d="M20 10l-8 22M60 4l-8 22M110 12l-8 22M170 6l-8 22M230 14l-8 22M270 4l-8 22"/></g>
+                      <g transform="translate(228 60)">
+                        <circle cx="0" cy="8" r="20" fill="#9AA29B"/>
+                        <path d="M-16-6l-5-13 14 5zM16-6l5-13-14 5z" fill="#9AA29B"/>
+                        <ellipse cx="-8" cy="5" rx="7" ry="5.5" fill="#33413B"/>
+                        <ellipse cx="8" cy="5" rx="7" ry="5.5" fill="#33413B"/>
+                        <circle cx="-8" cy="5" r="2.2" fill="#E7E9E3"/>
+                        <circle cx="8" cy="5" r="2.2" fill="#E7E9E3"/>
+                        <ellipse cx="0" cy="17" rx="4" ry="3" fill="#33413B"/>
+                      </g>
+                    </svg>
+                  </div>
+                  <div class="bubble paw"><span class="who">Paw</span>Самое интересное - кем был Мистер Уайз и что такое Братство Девяти - расскажу на причале. Тут слишком много ушей.</div>
+                  <div class="bubble paw"><span class="who">Paw</span>Три километра вдоль воды. Дойдёшь - узнаешь.</div>
+                </div>
+                <div class="scr-foot"><button class="btn" data-go="4">Идти к причалу</button></div>
+              </div>
+
+              <!-- 4 -->
+              <div class="scr" data-s="4">
+                <div class="scr-top"><span class="mono">Задание</span><span class="mono">день 1</span></div>
+                <div class="scr-main">
+                  <h5>Дойди до причала</h5>
+                  <div class="dest">
+                    <span class="name">Причал, порт Сан-Антонио</span>
+                    <div class="bar"><i style="width:0%"></i></div>
+                    <div class="nums"><span>0,0 км</span><span>3,0 км</span></div>
+                  </div>
+                  <p class="sm">Считается любое движение: шаг, бег, велосипед, вода. Засчитаем то, что ты и так сделаешь сегодня.</p>
+                </div>
+                <div class="scr-foot">
+                  <button class="btn dark" data-go="5">Подключить Strava</button>
+                  <button class="btn ghost" data-go="6">Записать самому</button>
+                </div>
+              </div>
+
+              <!-- 5 strava -->
+              <div class="scr" data-s="5">
+                <div class="scr-top"><span class="mono">Strava подключена</span><span class="mono">день 1</span></div>
+                <div class="scr-main">
+                  <h5>Вчера ты уже прошёл 4,1 км</h5>
+                  <p class="sm">Нашли последнюю тренировку. Она засчитывается в маршрут прямо сейчас - делать ничего не нужно.</p>
+                  <div class="dest">
+                    <span class="name">Причал, порт Сан-Антонио</span>
+                    <div class="bar"><i style="width:100%"></i></div>
+                    <div class="nums"><span>3,0 км</span><span>ты на месте</span></div>
+                  </div>
+                  <div class="bubble paw"><span class="who">Paw</span>Быстро. Садись, судно отходит через час.</div>
+                </div>
+                <div class="scr-foot">
+                  <button class="btn" data-go="7">Дальше</button>
+                  <p class="microcopy">Кому Strava не завелась - путь через второй день, он основной</p>
+                </div>
+              </div>
+
+              <!-- 6 manual -->
+              <div class="scr" data-s="6">
+                <div class="scr-top"><span class="mono">Записать движение</span><span class="mono">день 1</span></div>
+                <div class="scr-main">
+                  <h5>Сколько прошёл?</h5>
+                  <div class="stepper">
+                    <button type="button" id="minus" aria-label="Меньше">−</button>
+                    <span class="v" id="km">1,5<small>км</small></span>
+                    <button type="button" id="plus" aria-label="Больше">+</button>
+                  </div>
+                  <div class="chips">
+                    <button class="chip" type="button" data-km="1.8">круг с собакой</button>
+                    <button class="chip" type="button" data-km="2.4">до работы и обратно</button>
+                    <button class="chip" type="button" data-km="5">обычная пробежка</button>
+                  </div>
+                  <p class="sm">Одно поле вместо восьми, мерки бытовые. Дата, время и тип подставляются сами.</p>
+                  <div class="dest">
+                    <span class="name">Причал, порт Сан-Антонио</span>
+                    <div class="bar"><i id="mbar" style="width:50%"></i></div>
+                    <div class="nums"><span id="mnow">1,5 км</span><span>3,0 км</span></div>
+                  </div>
+                </div>
+                <div class="scr-foot"><button class="btn" data-go="7" id="mcta">Пройти 1,5 км к причалу</button></div>
+              </div>
+
+              <!-- 7 day 2 -->
+              <div class="scr" data-s="7">
+                <div class="scr-top"><span class="mono">Amazonia Route</span><span class="mono">день 2</span></div>
+                <div class="scr-main">
+                  <div class="nightbreak">на следующий день</div>
+                  <div class="push">
+                    <span class="app">MyFinishLine · 08:40</span>
+                    <span class="txt">Paw: судно стоит у пирса, но капитан нервничает. Я занял тебе место.</span>
+                  </div>
+                  <p class="sm">Одно сообщение голосом персонажа вместо напоминания от бренда. Оно возвращает в историю, а не напоминает о неоплаченной подписке.</p>
+                  <div class="dest">
+                    <span class="name">Ты дошёл до причала</span>
+                    <div class="bar"><i style="width:100%"></i></div>
+                    <div class="nums"><span>3,0 / 3,0 км</span><span>за два дня</span></div>
+                  </div>
+                </div>
+                <div class="scr-foot"><button class="btn" data-go="8">Забрать карточку места</button></div>
+              </div>
+
+              <!-- 8 card -->
+              <div class="scr" data-s="8">
+                <div class="scr-top"><span class="mono">Карточка места</span><span class="mono">1 из 20</span></div>
+                <div class="scr-main">
+                  <div class="card">
+                    <svg viewBox="0 0 300 150" role="img" aria-label="Карточка: порт Сан-Антонио на закате">
+                      <rect width="300" height="150" fill="#E9DCC0"/>
+                      <rect x="10" y="10" width="280" height="130" fill="#7C6A52"/>
+                      <rect x="16" y="16" width="268" height="118" fill="#C97C46"/>
+                      <circle cx="220" cy="58" r="22" fill="#F2D49A"/>
+                      <path d="M16 96h268v38H16z" fill="#2F4A55"/>
+                      <path d="M40 96l18-26 16 26zM90 96l26-34 22 34z" fill="#41504A"/>
+                      <rect x="150" y="74" width="74" height="22" fill="#3B4A50"/>
+                      <rect x="164" y="60" width="9" height="14" fill="#3B4A50"/>
+                      <g stroke="#1F3038" stroke-width="2"><path d="M16 112h268"/></g>
+                      <rect x="16" y="116" width="268" height="18" fill="#26343A"/>
+                    </svg>
+                    <div class="cardmeta"><span>Чили · порт Сан-Антонио</span><span>карточка 1 / 20</span></div>
+                  </div>
+                  <h5>Первая из двадцати</h5>
+                  <p class="sm">Четыре такие карточки кладут в коробку финишера вместе с медалью и фигуркой Paw. Эту ты уже открыл - она твоя, даже если дальше не пойдёшь.</p>
+                  <div class="locks"><i class="on">1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i><i>10</i></div>
+                </div>
+                <div class="scr-foot">
+                  <button class="btn" data-go="9">Подняться на борт</button>
+                  <p class="microcopy">Карточкой можно поделиться</p>
+                </div>
+              </div>
+
+              <!-- 9 cliffhanger -->
+              <div class="scr" data-s="9">
+                <div class="scr-top"><span class="mono">Глава 2 · Устье Амазонки</span><span class="mono">обрыв</span></div>
+                <div class="scr-main">
+                  <div class="panel">
+                    <svg viewBox="0 0 300 124" role="img" aria-label="Первый кадр джунглей, обрезанный снизу">
+                      <rect width="300" height="124" fill="#7FA890"/>
+                      <path d="M0 74c40-22 70 6 108-10s62 14 96-6 60 2 96-12v78H0z" fill="#3E6B52"/>
+                      <path d="M0 94c50-16 84 10 126-6s70 12 108-8 44 4 66-4v28H0z" fill="#2A4E3B"/>
+                      <g fill="#254636"><path d="M30 60c14-16 30-16 30 0-10-6-20-6-30 0zM250 54c-14-14-28-14-28 0 9-5 19-5 28 0z"/></g>
+                      <circle cx="150" cy="30" r="17" fill="#F2E3B4" opacity=".5"/>
+                      <rect y="104" width="300" height="20" fill="#16211C"/>
+                      <g stroke="#16211C" stroke-width="2" stroke-dasharray="6 5"><path d="M0 104h300"/></g>
+                    </svg>
+                  </div>
+                  <div class="bubble paw"><span class="who">Paw</span>Вот она. Мистер Уайз собрал нас девятерых, потому что искал здесь одну вещь. И нашёл. Именно поэтому его</div>
+                  <p class="sm" style="text-align:center;opacity:.65">кадр обрывается</p>
+                </div>
+                <div class="scr-foot"><button class="btn" data-go="10">Что дальше</button></div>
+              </div>
+
+              <!-- 10 paywall -->
+              <div class="scr" data-s="10">
+                <div class="scr-top"><span class="mono">Продолжение</span><span class="mono">маршрут Amazonia</span></div>
+                <div class="scr-main">
+                  <h5>Девятнадцать глав ещё под облаками</h5>
+                  <div class="locks"><i class="on">1</i><i class="on">2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i><i>10</i><i>11</i><i>12</i></div>
+                  <p class="sm">Ты прошёл 3 км за два дня. В таком темпе Амазония - это десять недель, и коробка приедет к концу лета.</p>
+                  <div class="priceblock">
+                    <div class="row"><span class="w">Полный маршрут<br>и коробка финишера</span><span class="p">$29</span></div>
+                    <span class="n">Медаль, фигурка Paw и 4 карточки мест, которые ты откроешь сам. Разовый платёж, доступ навсегда.</span>
+                  </div>
+                  <p class="sm" style="opacity:.8">За прошлую неделю коробки уехали к 34 участникам. Их фотографии - в разделе «Финишировали».</p>
+                </div>
+                <div class="scr-foot">
+                  <button class="btn" data-go="1">Продолжить историю</button>
+                  <p class="microcopy">Только цифровая версия - $19 · Возврат 30 дней · Оплата здесь же, код активации не нужен</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="proto-notes" id="notes">
+            <div class="note on" data-n="1">
+              <span class="tag">Шаг 1 · вход</span>
+              <h4>История начинается до регистрации</h4>
+              <p>Первый экран - крючок сюжета, а не форма и не тур по платформе. Почту спросим после первой главы, когда есть что сохранять.</p>
+              <div class="was"><b>Было</b>«Try Free Demo» → /signup → «Welcome. Let's walk through the platform and its guidelines» → «Start Tour»</div>
+            </div>
+            <div class="note" data-n="2">
+              <span class="tag">Шаг 2 · онбординг</span>
+              <h4>Туториала нет</h4>
+              <p>Тринадцать слайдов про подключение трекера, список активностей, добавление на домашний экран и напоминания - удалены. Всё это появится позже и по поводу.</p>
+              <div class="was"><b>Было</b>13 автослайдов, из них 5 - инструкции по интерфейсу. Каждый второй кадр не успевал загрузиться: «Story loaded partially / Retry»</div>
+            </div>
+            <div class="note" data-n="3">
+              <span class="tag">Шаг 3 · крючок</span>
+              <h4>Задание выдаёт персонаж</h4>
+              <p>Не система, а Paw, и не абстрактные километры, а расстояние до конкретного места в кадре, который игрок только что видел.</p>
+              <div class="job"><b>Чья работа</b>Сегмент 1, Core Job 2: получить внешнюю причину выйти именно сегодня. Критерий - причина конкретная и её даёт кто-то, а не я сам себе</div>
+              <div class="was"><b>Было</b>Контракт «The Beginning»: «Go to Profile → Activities to log your first activity manually or by connecting Strava/Fitbit»</div>
+            </div>
+            <div class="note" data-n="4">
+              <span class="tag">Шаг 4 · трекер</span>
+              <h4>Strava предлагается в момент, когда она нужна</h4>
+              <p>Подключение просят там, где сюжет отправляет игрока на улицу, а не на третьем слайде онбординга. Числа на экране - расстояние до причала, а не пять из ста двадцати.</p>
+              <div class="job"><b>Чья работа</b>Сегмент 2, Core Job 2: видеть, где я сейчас и что будет следующим. Прямая жалоба на конкурента: «wants sub-milestone markers between attractions, especially 200+ mile gaps»</div>
+            </div>
+            <div class="note" data-n="5">
+              <span class="tag">Шаг 5 · трекер подключён</span>
+              <h4>Ускоритель, а не основной путь</h4>
+              <p>У кого Strava работает, последняя реальная тренировка подтягивается сразу - момент наступает в первой же сессии. Но строить триал на интеграции нельзя: сбои синхронизации - самая частая жалоба во всей категории, от Apple Health до Garmin.</p>
+              <div class="job"><b>Поправка из отзывов</b>«Apple Health sync only logs 0.1 miles despite actual walking» · «Garmin watch sync issues; resorts to manual entry» · «double-counting miles»</div>
+            </div>
+            <div class="note" data-n="6">
+              <span class="tag">Шаг 5 · вручную</span>
+              <h4>Ручной ввод - равный путь и ритуал</h4>
+              <p>Одно поле вместо восьми, но мерки бытовые - «круг с собакой», «до работы и обратно», - а не абстрактные пресеты и не кнопка «Max», которой триал закрывается одним тапом за пятнадцать секунд. Кнопка называет последствие в сюжете, а не операцию с базой.</p>
+              <div class="job"><b>Поправка из отзывов</b>Ручной ввод многие выбирают сознательно: «prefers manual entry for deeper engagement» · «instant gratification of logging and seeing map position» · «switched to manual for same-day viewing»</div>
+              <div class="was"><b>Было</b>8 полей, и дефолтные значения не проходят собственную валидацию: «The start date field must be a date before or equal to now»</div>
+            </div>
+            <div class="note" data-n="7">
+              <span class="tag">Шаг 6 · второй день</span>
+              <h4>Ради этого экрана всё и затевалось</h4>
+              <p>Человек ушёл жить свою жизнь, вернулся - и мир сдвинулся сам. Без второй сессии триал физически не может продать то, чем продукт является.</p>
+              <div class="job"><b>Чья работа</b>Работа самого триала: убедиться, что мои настоящие тренировки правда во что-то превращаются. Критерий - увидел, как моё движение сдвинуло сюжет</div>
+              <div class="was"><b>Было</b>Второй сессии в демо нет. Пять километров закрываются одним заполнением формы за минуту, не выходя из дома</div>
+            </div>
+            <div class="note" data-n="8">
+              <span class="tag">Шаг 7 · карточка</span>
+              <h4>Предмет выдаётся за приход в место</h4>
+              <p>Не «твой триал кончился, забери утешительный приз», а «ты пришёл в порт - вот порт». Рядом сразу видно серию и то, что четыре такие карточки лежат в коробке. Карточкой можно поделиться - этому сегменту важно предъявлять.</p>
+              <div class="job"><b>Чья работа</b>Сегмент 3, обе Core Jobs: получить вещь, которую можно показать, и копить серию. «Medals displayed in office» · «completed 6 challenges; got sister to join»</div>
+            </div>
+            <div class="note" data-n="9">
+              <span class="tag">Шаг 8 · обрыв</span>
+              <h4>Триал кончается на полуслове и в джунглях</h4>
+              <p>Обрыв внутри реплики, а не на административном сообщении. И происходит он в Амазонии: за весь нынешний триал человек не видит ни одного кадра места, ради которого покупает.</p>
+              <div class="job"><b>Чья работа</b>Сегмент 2, Core Job 1: оказываться в настоящем месте. «The next best thing to being there»</div>
+              <div class="was"><b>Было</b>Модалка «Invite someone to walk it with you», следом «Trial Period Ended» и «115 km to the medal». Обе демо-главы - квартира и порт в Чили</div>
+            </div>
+            <div class="note" data-n="10">
+              <span class="tag">Шаг 9 · пейволл</span>
+              <h4>120 км превращаются в срок, а не в счёт</h4>
+              <p>Дистанция пересчитывается в недели по фактическому темпу игрока. Один тариф вместо трёх с таблицей сравнения, цена на экране, возврат назван, вместо буллетов - живые люди, которым уже приехали коробки. Оплата не выходит из игры, код активации выключен.</p>
+              <div class="job"><b>Поправка из отзывов</b>Код активации - самый частый сюжет в плохих отзывах категории: «purchased challenge codes labeled invalid» · «credit card charged but no challenge code received»</div>
+              <div class="was"><b>Было</b>Цены нет. Кнопка ведёт на маркетинговый сайт: три тарифа, два допа, таблица сравнения, FAQ на 10 вопросов, затем письмо с шестизначным кодом</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 -->
+  <section>
+    <div class="sec-head">
+      <div class="sec-num">6</div>
+      <div>
+        <h2>Откуда берутся 30 и почему 45 - это другая задача</h2>
+        <p class="sub">Внутренних цифр у меня нет, поэтому воронка ниже - модель, а не факт. Проверяется за день: на сайте уже стоят Яндекс Вебвизор и Microsoft Clarity, записи сессий есть.</p>
+      </div>
+    </div>
+    <div class="sec-body">
+      <div class="spacer"></div>
+      <div>
+        <div class="tablewrap">
+          <table>
+            <thead><tr><th>Шаг воронки</th><th>Сейчас</th><th>После</th><th>Что даёт прирост</th></tr></thead>
+            <tbody>
+              <tr><td>Зашли в демо</td><td class="n">100</td><td class="n">100</td><td></td></tr>
+              <tr><td>Дошли до первого кадра истории</td><td class="n">70</td><td class="n">96</td><td>Починить offline, догружать кадры, убрать тур</td></tr>
+              <tr><td>Дочитали главу 1</td><td class="n">55</td><td class="n">84</td><td>История сразу, подсказки убраны</td></tr>
+              <tr><td>Сделали первое движение</td><td class="n">42</td><td class="n">68</td><td>Одно поле с бытовыми мерками, чиненая валидация</td></tr>
+              <tr><td>Вернулись во вторую сессию</td><td class="n">-</td><td class="n">40</td><td>Двухдневная структура, пуш голосом персонажа</td></tr>
+              <tr><td>Увидели пейволл</td><td class="n">40</td><td class="n">64</td><td></td></tr>
+              <tr class="total"><td>Купили</td><td class="n">15</td><td class="n">29</td><td><span class="delta">37% → 45% от пейволла</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="prose" style="margin-top:28px">
+          <p>Тридцать из ста получаются почти целиком за счёт того, что до пейволла доезжает в полтора раза больше людей и доезжают они в правильном состоянии: с настоящей тренировкой за спиной, с карточкой в коллекции и на обрыве реплики. Конверсия самого пейволла растёт скромно - с 37 до 45 процентов.</p>
+          <p><strong>Дальше упираемся в оффер, и это отдельный проект.</strong> Чтобы выйти на 45 из ста, чинить воронку уже недостаточно:</p>
+          <p><strong>Оплата.</strong> Сейчас между решением и покупкой шесть шагов и две смены контекста. Шторка с Apple Pay и Google Pay внутри игры и отключение шестизначного кода - самая дешёвая по трудозатратам и самая крупная по эффекту правка во всём списке.</p>
+          <p><strong>Догоняющая серия.</strong> Не все покупают на обрыве. Три письма и два пуша за неделю, каждый - не про оплату, а про то, что осталось недочитанным.</p>
+          <p><strong>Цена во время маршрута.</strong> Честный дедлайн: пока игрок в пути, маршрут стоит 24 доллара, через 48 часов возвращается к 29. Работает только если дедлайн настоящий.</p>
+          <p><strong>Вдвоём.</strong> Инстинкт с приглашением друга правильный, место неправильное. В отзывах люди приходят от знакомых и втягивают родню - «got sister to join». Значит «пройти вдвоём» это вариант покупки, а не модалка перед ней.</p>
+        </div>
+
+        <div class="caveat">
+          <span class="tag">Что надо проверить до того, как верить этим числам</span>
+          <p>Первое: посмотреть двадцать записей Clarity от момента входа в демо и посчитать, сколько человек упирается в баннер offline и сколько уходит на слайдах туториала. Второе: доля пользователей с подключённым трекером - от неё зависит, скольким момент «мир сдвинулся» достанется в первой сессии, а скольким нужна вторая. Третье: сколько из купивших вообще доходили до пейволла, а сколько покупали с лендинга мимо демо. Четвёртое: проверить сегменты на своих - работы взяты из отзывов конкурента, у MyFinishLine их пока нет, и это самое слабое место всего разбора.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 -->
+  <section>
+    <div class="sec-head">
+      <div class="sec-num">7</div>
+      <div>
+        <h2>Что делать в первую неделю</h2>
+        <p class="sub">Порядок - по отношению эффекта к трудозатратам. Первые пять пунктов не требуют ни сценариста, ни художника.</p>
+      </div>
+    </div>
+    <div class="sec-body">
+      <div class="spacer"></div>
+      <div class="backlog">
+        <div class="item p1"><span class="w">1</span><div><h4>Убить ложный offline</h4><p>Одна проверка связи с дебаунсом вместо тридцати за секунду, 503 трактовать как «повторить позже», никогда не блокировать контент по результату проверки.</p></div><span class="cost">полдня</span></div>
+        <div class="item p1"><span class="w">2</span><div><h4>Починить дефолты формы ручного ввода</h4><p>Время старта считать в таймзоне пользователя, не терять введённое название при ошибке валидации.</p></div><span class="cost">полдня</span></div>
+        <div class="item p1"><span class="w">3</span><div><h4>Убрать реферальный попап и рейтинг из триала</h4><p>Попап перенести за покупку. Рейтинг скрыть до первой покупки: он бьёт по сегменту, который компания сама назвала целевым в своём FAQ.</p></div><span class="cost">час</span></div>
+        <div class="item p1"><span class="w">4</span><div><h4>Переписать пейволл</h4><p>Цена на экран, один тариф, «115 km to the medal» заменить на срок в неделях по темпу игрока, добавить возврат и фотографии пришедших коробок. Текст, не разработка.</p></div><span class="cost">день</span></div>
+        <div class="item p1"><span class="w">5</span><div><h4>Выдать карточку места на финише демо</h4><p>Ассеты карточек уже есть - их кладут в коробку. Показать первую как награду за приход в порт и сразу показать серию.</p></div><span class="cost">день</span></div>
+        <div class="item p2"><span class="w">6</span><div><h4>Оплата внутри приложения</h4><p>Шторка с Apple Pay и Google Pay вместо ухода на маркетинговый сайт. Отключить код активации для тех, кто уже залогинен.</p></div><span class="cost">неделя</span></div>
+        <div class="item p2"><span class="w">7</span><div><h4>Вырезать туториал, догружать кадры</h4><p>13 слайдов удалить, полезное раскидать по моментам, где оно нужно. Не листать сторис, пока следующий кадр не готов.</p></div><span class="cost">неделя</span></div>
+        <div class="item p2"><span class="w">8</span><div><h4>Двухдневная структура демо</h4><p>Цель триала - место, а не процент. Пуш голосом Paw на следующее утро. Автоимпорт последней тренировки при подключении Strava - как ускоритель, не как основной путь.</p></div><span class="cost">2 недели</span></div>
+        <div class="item p2"><span class="w">9</span><div><h4>Довести демо до джунглей</h4><p>Последний кадр триала - первый кадр Амазонии. Сейчас человек покупает место, которого в демо не видел.</p></div><span class="cost">неделя</span></div>
+        <div class="item"><span class="w">10</span><div><h4>Первая глава без регистрации</h4><p>Гостевой режим, почта после главы. Считать конверсию от кликов по «Try Free Demo», иначе метрика улучшится сама и обманет.</p></div><span class="cost">2 недели</span></div>
+        <div class="item"><span class="w">11</span><div><h4>Переписать 20 контрактов в мир игры</h4><p>Условия те же, язык - Paw и Амазония. Убрать повторяющуюся приписку про Quick Guide из всех карточек.</p></div><span class="cost">неделя</span></div>
+        <div class="item"><span class="w">12</span><div><h4>Пересмотреть лимит 10 км в сутки на ручной ввод</h4><p>Он анти-чит, но бьёт по тем, кто сознательно выбрал ручной ввод как ритуал, - а это платящий сегмент. В триале не проявляется, после покупки проявляется.</p></div><span class="cost">обсудить</span></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Разбор сделан по живой демо-версии myfinishline.app/amazonia-demo, сентябрь 2026. Пройдены все экраны триала.<br>
+    Работы и сегменты - по методологии AJTBD, на отзывах категории: The Conqueror, Trustpilot и App Store. У MyFinishLine собственной базы отзывов нет.<br>
+    Цитаты интерфейса и отзывов приведены как есть, для разбора. Иллюстрации в прототипе - собственные, схематические.
+  </footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var root=document.documentElement, tbtn=document.getElementById("theme");
+  function stored(){try{return localStorage.getItem("mfl-theme")}catch(e){return null}}
+  var t=stored(); if(t){root.setAttribute("data-theme",t);}
+  tbtn.addEventListener("click",function(){
+    var cur=root.getAttribute("data-theme");
+    var next = cur==="dark" ? "light" : cur==="light" ? "dark"
+      : (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "dark");
+    root.setAttribute("data-theme",next);
+    try{localStorage.setItem("mfl-theme",next)}catch(e){}
+  });
+
+  var scrs=Array.prototype.slice.call(document.querySelectorAll(".scr"));
+  var notes=Array.prototype.slice.call(document.querySelectorAll(".note"));
+  var pips=document.getElementById("pips");
+  var label=document.getElementById("stepLabel");
+  var screenEl=document.getElementById("screen");
+
+  var totalSteps=9;
+  for(var i=0;i<totalSteps;i++){ pips.appendChild(document.createElement("i")); }
+  var pipEls=Array.prototype.slice.call(pips.children);
+
+  /* screens 5 and 6 are two branches of the same step */
+  var stepOf={1:1,2:2,3:3,4:4,5:5,6:5,7:6,8:7,9:8,10:9};
+
+  function show(n){
+    scrs.forEach(function(s){ s.classList.toggle("on", s.getAttribute("data-s")===String(n)); });
+    notes.forEach(function(x){ x.classList.toggle("on", x.getAttribute("data-n")===String(n)); });
+    var st=stepOf[n]||1;
+    pipEls.forEach(function(p,i){ p.classList.toggle("on", i<st); });
+    label.textContent="Шаг "+st+" из "+totalSteps;
+    var main=screenEl.querySelector(".scr.on .scr-main");
+    if(main){ main.scrollTop=0; }
+  }
+
+  screenEl.addEventListener("click",function(e){
+    var b=e.target.closest("[data-go]");
+    if(!b) return;
+    show(parseInt(b.getAttribute("data-go"),10));
+  });
+  document.getElementById("reset").addEventListener("click",function(){ show(1); });
+
+  /* manual distance */
+  var km=1.5, target=3.0;
+  var kmEl=document.getElementById("km"), bar=document.getElementById("mbar"),
+      now=document.getElementById("mnow"), cta=document.getElementById("mcta");
+  function fmt(v){ return v.toFixed(1).replace(".",","); }
+  function paint(){
+    kmEl.innerHTML=fmt(km)+"<small>км</small>";
+    bar.style.width=Math.min(100,(km/target)*100)+"%";
+    now.textContent=fmt(km)+" км";
+    cta.textContent = km>=target ? "Дойти до причала" : "Пройти "+fmt(km)+" км к причалу";
+  }
+  document.getElementById("plus").addEventListener("click",function(){ km=Math.min(12,km+0.5); paint(); });
+  document.getElementById("minus").addEventListener("click",function(){ km=Math.max(0.5,km-0.5); paint(); });
+  Array.prototype.slice.call(document.querySelectorAll(".chip[data-km]")).forEach(function(c){
+    c.addEventListener("click",function(){ km=parseFloat(c.getAttribute("data-km")); paint(); });
+  });
+  paint();
+  show(1);
+})();
+</script>
+</body>
+</html>
