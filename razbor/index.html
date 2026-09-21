@@ -197,6 +197,11 @@ code.ev{font-family:var(--mono);font-size:12.5px;background:var(--surface);borde
 
 /* ---- diagnosis ---- */
 .thesis{border-left:3px solid var(--route);padding:4px 0 4px 20px;margin-block:6px 30px;font-family:var(--display);font-size:clamp(19px,2.6vw,25px);line-height:1.34;font-weight:600;max-width:34ch}
+.adgap{margin-bottom:30px}
+.adgap h3{font-family:var(--display)}
+.adgap table td:first-child{font-style:italic;color:var(--ink-2)}
+.adgap table td:last-child{color:var(--warn)}
+.adgap-note{margin-top:16px;font-size:16px;line-height:1.6;max-width:66ch;color:var(--ink-2)}
 .probs{display:grid;grid-template-columns:repeat(auto-fit,minmax(248px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:10px;overflow:hidden}
 .prob{background:var(--surface);padding:18px 18px 20px;display:flex;flex-direction:column;gap:8px}
 .prob .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--route)}
@@ -682,6 +687,25 @@ GET /api/user?mfl_online_check=1&amp;t=1789991871402 <span class="k">503</span><
       <div>
         <p class="thesis">Магия продукта в том, что ты тренируешься в реальной жизни, а сюжет двигается сам. Демо ни разу не даёт этого почувствовать: единственное «движение» за весь триал - цифра, вписанная в форму.</p>
 
+        <div class="adgap">
+          <h3>Что продала реклама и что получил человек</h3>
+          <p class="sub" style="margin:8px 0 16px">Около восьмидесяти объявлений в Meta Ad Library, последнее крутилось до 20 сентября 2026. Слева - дословные обещания оттуда, справа - первые две минуты после клика.</p>
+          <div class="tablewrap">
+            <table>
+              <thead><tr><th>Обещание в объявлении</th><th>Что на самом деле</th></tr></thead>
+              <tbody>
+                <tr><td>«See what the finisher medal looks like»</td><td>Медаль не показывают ни разу за весь триал</td></tr>
+                <tr><td>«a box shows up at your door: a real medal, one of 5 collectible figures, and your story cards»</td><td>Коробка - строчка в списке возможностей на пейволле</td></tr>
+                <tr><td>«You have just crossed the line into the wild jungle»</td><td>Обе демо-главы: квартира и порт в Чили. Джунглей в демо нет</td></tr>
+                <tr><td>«a full-scale game you can't play from the couch»</td><td>Демо целиком закрывается с дивана за минуту через форму на восемь полей</td></tr>
+                <tr><td>«Free to start. No pressure to finish fast.»</td><td>Первое задание приходит с таймером на 24 часа</td></tr>
+                <tr><td>«Register free and see what's waiting for you»</td><td>После регистрации: «Let's walk through the platform and its guidelines»</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="adgap-note">Шесть обещаний - шесть противоречий, и за каждый клик заплачено. Это не придирка к копирайту: человек приходит с конкретным ожиданием, и триал ломает его в первые же секунды. Те 85, что не покупают, - во многом те, кому на входе показали, что реклама преувеличила. Редизайн ниже закрывает все шесть пунктов, и это не совпадение: список обещаний оказался лучшим техзаданием на демо, чем любой бриф.</p>
+        </div>
+
         <div class="probs">
           <div class="prob"><span class="tag">Структура</span><h4>Демо - это кусок, а не история</h4><p>5 км из 120 - четыре процента продукта. Всё демо проходится за одну сессию, не вставая с дивана. Человек решает про покупку, ни разу не испытав того, что покупает.</p></div>
           <div class="prob"><span class="tag">Валюта</span><h4>Продают то, что выдают в долг</h4><p>Дистанция - одновременно и товар, и единица триала. Поэтому каждый экран напоминает про недостающие 96%, а пейволл открывается фразой про 115 оставшихся километров.</p></div>
@@ -689,7 +713,7 @@ GET /api/user?mfl_online_check=1&amp;t=1789991871402 <span class="k">503</span><
           <div class="prob"><span class="tag">Место</span><h4>Амазонию в демо не показывают</h4><p>Обе демо-главы происходят в квартире и в порту Сан-Антонио. Джунгли, которые продаёт реклама и которые нужны второму сегменту, в триале не появляются.</p></div>
           <div class="prob"><span class="tag">Драматургия</span><h4>Финал триала не на пике</h4><p>Глава кончается отличным крючком, дальше идут реферальный попап и административный заголовок «Trial Period Ended». Напряжение гасится двумя модалками.</p></div>
           <div class="prob"><span class="tag">Надёжность</span><h4>Три жёстких стопа за 90 секунд</h4><p>Ложный offline блокирует онбординг, слайды не догружаются, форма падает на своих дефолтах. Это закрытые двери на самом узком месте воронки.</p></div>
-          <div class="prob"><span class="tag">Доверие</span><h4>Нечем подпереть решение</h4><p>На пейволле нет ни цены, ни возврата, ни одного живого человека. Лидерборд из шестнадцати строк работает против покупки и против заявленного сегмента.</p></div>
+          <div class="prob"><span class="tag">Доверие</span><h4>Нечем подпереть решение</h4><p>На пейволле нет ни цены, ни гарантии, ни одного живого человека. По их политике цифровая часть невозвратна с первого открытого кадра, и на экране решения об этом молчат. Лидерборд из шестнадцати строк работает против покупки.</p></div>
           <div class="prob"><span class="tag">Предмет</span><h4>Коллекционеру нечего взять</h4><p>Сегмент, который покупает по три маршрута разом, за весь триал не получает ни одного предмета в коллекцию - только текстовое обещание коробки.</p></div>
         </div>
 
@@ -978,7 +1002,7 @@ GET /api/user?mfl_online_check=1&amp;t=1789991871402 <span class="k">503</span><
                 </div>
                 <div class="scr-foot">
                   <button class="btn" data-go="1">Продолжить историю</button>
-                  <p class="microcopy">Только цифровая версия - $19 · Возврат 30 дней · Оплата здесь же, код активации не нужен</p>
+                  <p class="microcopy">Только цифровая версия - $19 · Год на прохождение · Оплата здесь же, код активации не нужен</p>
                 </div>
               </div>
 
@@ -1047,7 +1071,7 @@ GET /api/user?mfl_online_check=1&amp;t=1789991871402 <span class="k">503</span><
             <div class="note" data-n="10">
               <span class="tag">Шаг 9 · пейволл</span>
               <h4>120 км превращаются в срок, а не в счёт</h4>
-              <p>Дистанция пересчитывается в недели по фактическому темпу игрока. Один тариф вместо трёх с таблицей сравнения, цена на экране, возврат назван, вместо буллетов - живые люди, которым уже приехали коробки. Оплата не выходит из игры, код активации выключен.</p>
+              <p>Дистанция пересчитывается в недели по фактическому темпу игрока. Один тариф вместо трёх с таблицей сравнения, цена на экране, коробку видно, вместо буллетов - живые люди, которым она уже приехала. Оплата не выходит из игры, код активации выключен.</p>
               <div class="job"><b>Поправка из отзывов</b>Код активации - самый частый сюжет в плохих отзывах категории: «purchased challenge codes labeled invalid» · «credit card charged but no challenge code received»</div>
               <div class="was"><b>Было</b>Цены нет. Кнопка ведёт на маркетинговый сайт: три тарифа, два допа, таблица сравнения, FAQ на 10 вопросов, затем письмо с шестизначным кодом</div>
             </div>
@@ -1116,7 +1140,7 @@ GET /api/user?mfl_online_check=1&amp;t=1789991871402 <span class="k">503</span><
         <div class="item p1"><span class="w">1</span><div><h4>Убить ложный offline</h4><p>Одна проверка связи с дебаунсом вместо тридцати за секунду, 503 трактовать как «повторить позже», никогда не блокировать контент по результату проверки.</p></div><span class="cost">полдня</span></div>
         <div class="item p1"><span class="w">2</span><div><h4>Починить дефолты формы ручного ввода</h4><p>Время старта считать в таймзоне пользователя, не терять введённое название при ошибке валидации.</p></div><span class="cost">полдня</span></div>
         <div class="item p1"><span class="w">3</span><div><h4>Убрать реферальный попап и рейтинг из триала</h4><p>Попап перенести за покупку. Рейтинг скрыть до первой покупки: он бьёт по сегменту, который компания сама назвала целевым в своём FAQ.</p></div><span class="cost">час</span></div>
-        <div class="item p1"><span class="w">4</span><div><h4>Переписать пейволл</h4><p>Цена на экран, один тариф, «115 km to the medal» заменить на срок в неделях по темпу игрока, добавить возврат и фотографии пришедших коробок. Текст, не разработка.</p></div><span class="cost">день</span></div>
+        <div class="item p1"><span class="w">4</span><div><h4>Переписать пейволл</h4><p>Цена на экран, один тариф, «115 km to the medal» заменить на срок в неделях по темпу игрока, показать коробку и фотографии пришедших. Текст и одна картинка, не разработка.</p></div><span class="cost">день</span></div>
         <div class="item p1"><span class="w">5</span><div><h4>Выдать карточку места на финише демо</h4><p>Ассеты карточек уже есть - их кладут в коробку. Показать первую как награду за приход в порт и сразу показать серию.</p></div><span class="cost">день</span></div>
         <div class="item p2"><span class="w">6</span><div><h4>Оплата внутри приложения</h4><p>Шторка с Apple Pay и Google Pay вместо ухода на маркетинговый сайт. Отключить код активации для тех, кто уже залогинен.</p></div><span class="cost">неделя</span></div>
         <div class="item p2"><span class="w">7</span><div><h4>Вырезать туториал, догружать кадры</h4><p>13 слайдов удалить, полезное раскидать по моментам, где оно нужно. Не листать сторис, пока следующий кадр не готов.</p></div><span class="cost">неделя</span></div>
