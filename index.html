@@ -19,7 +19,6 @@
 </head>
 <body>
 
-
 <style>
 :root{
   --night:#0C1411;
@@ -70,7 +69,7 @@ button{font:inherit;color:inherit}
 
 /* ---------- chrome ---------- */
 .hud{
-  flex:0 0 auto;padding:calc(env(safe-area-inset-top,0px) + 12px) 16px 10px;
+  flex:0 0 auto;padding:calc(env(safe-area-inset-top,0px) + 12px) 118px 10px 16px;
   display:flex;align-items:center;gap:10px;min-height:52px;
 }
 .hud .dest{flex:1;min-width:0;display:flex;flex-direction:column;gap:5px}
@@ -234,6 +233,7 @@ a.btn{display:block;text-decoration:none;box-sizing:border-box}
   }
   .rail .rh{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
   .whybtn{display:none}
+  .hud{padding-right:16px}
 }
 </style>
 
@@ -569,7 +569,7 @@ a.btn{display:block;text-decoration:none;box-sizing:border-box}
                 <text x="100" y="228" text-anchor="middle" font-family="Golos Text,sans-serif" font-size="15" font-weight="800" fill="#E7DFC9">ПОРТ САН-АНТОНИО</text>
                 <text x="100" y="243" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="8.5" letter-spacing="1.4" fill="#9DA79A">CHILE · 33°35′S 71°37′W</text>
               </svg>
-              <div class="foot"><span>карточка 01 / 20</span><span>место пройдено</span></div>
+              <div class="foot"><span>01 / 20</span><span>место пройдено</span></div>
             </div>
             <div class="dots" id="carddots"></div>
             <p class="fact">Устье реки Майпо, сто километров от Сантьяго.<br>Главный контейнерный порт Чили.</p>
@@ -602,8 +602,10 @@ a.btn{display:block;text-decoration:none;box-sizing:border-box}
             <path d="M0 400c70-26 120 14 190-8s130 20 200-10v378H0z" fill="#15301F"/>
             <path d="M0 520c60-20 130 16 200-6s130 14 190-6v252H0z" fill="#102518"/>
             <g fill="#0D2015" opacity=".9"><path d="M0 640c80-16 140 12 210-6s110 10 180-4v130H0z"/></g>
-            <ellipse cx="200" cy="150" rx="240" ry="120" fill="#7B9481" opacity=".5" filter="url(#soft)"/>
-            <ellipse cx="90" cy="70" rx="180" ry="90" fill="#8AA38F" opacity=".45" filter="url(#soft)"/>
+            <path d="M0 176c62-26 106 16 176-8s132 20 214-12v168H0z" fill="#2C5236"/>
+            <path d="M0 236c70-22 116 18 186-6s126 16 204-8v120H0z" fill="#27492F"/>
+            <ellipse cx="200" cy="120" rx="240" ry="96" fill="#7B9481" opacity=".34" filter="url(#soft)"/>
+            <ellipse cx="90" cy="46" rx="180" ry="74" fill="#8AA38F" opacity=".3" filter="url(#soft)"/>
             <rect width="390" height="760" filter="url(#grain)" opacity=".07"/>
           </svg>
         </div>
