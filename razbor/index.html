@@ -19,11 +19,6 @@
 html{color-scheme:light dark}
 :root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 body{margin:0}
-img{max-width:100%}
-[hidden]{display:none!important}
-</style>
-</head>
-<body>
 
 <style>
 :root{
@@ -319,13 +314,29 @@ tr.total td.n{color:var(--route)}
 .caveat p{font-size:15px;line-height:1.55;color:var(--ink-2)}
 
 footer{padding-block:40px 60px;color:var(--ink-3);font-family:var(--mono);font-size:11.5px;line-height:1.8}
+.toplink{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
+  border:1px solid var(--route);border-radius:99px;padding:5px 11px;
+  color:var(--route);text-decoration:none;white-space:nowrap;
+}
+.toplink:hover{background:var(--route-soft)}
+.demolink{
+  display:inline-flex;align-items:center;gap:9px;font-family:var(--display);font-size:15px;font-weight:600;
+  color:var(--route);text-decoration:none;border:1.5px solid var(--route);border-radius:999px;padding:11px 20px;
+}
+.demolink:hover{background:var(--route-soft)}
+.demolink::after{content:"\2192";font-weight:700}
+.inlink{color:var(--route);font-weight:600}
 .themebtn{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;background:none;border:1px solid var(--rule);border-radius:99px;padding:5px 11px;color:var(--ink-2);cursor:pointer}
 </style>
 
 <div class="topbar">
   <div class="topbar-in">
     <strong>Amazonia Route / триал</strong>
-    <button class="themebtn" id="theme" type="button">тема</button>
+    <span style="display:flex;gap:8px;align-items:center">
+      <a class="toplink" href="https://nikit34.github.io/amazonia-trial/">играбельное демо</a>
+      <button class="themebtn" id="theme" type="button">тема</button>
+    </span>
   </div>
 </div>
 
@@ -337,6 +348,7 @@ footer{padding-block:40px 60px;color:var(--ink-3);font-family:var(--mono);font-s
         <p class="eyebrow">Разбор, работы клиента и редизайн демо-версии · MyFinishLine</p>
         <h1>Первые два дня Amazonia</h1>
         <p class="lead">Триал продаёт 120 километров, а даёт потрогать форму ввода. Покупку решает не длина демо, а то, случился ли в нём момент «я прошёл - и мир сдвинулся».</p>
+        <p style="margin-top:22px"><a class="demolink" href="https://nikit34.github.io/amazonia-trial/">Открыть играбельное демо</a></p>
       </div>
       <div class="scoreboard">
         <div class="score-row now"><span class="score-val">15</span><span class="score-lbl">сейчас</span><span class="score-note">из 100 зашедших в демо</span></div>
@@ -725,7 +737,7 @@ GET /api/user?mfl_online_check=1&amp;t=1789991871402 <span class="k">503</span><
       <div class="sec-num">5</div>
       <div>
         <h2>Прототип нового триала</h2>
-        <p class="sub">Кликабельно. Справа от экрана - что поменялось на этом шаге, чью работу это закрывает и как было. Рисунок условный: это прототип сценария, а не арт.</p>
+        <p class="sub">Кликабельно. Справа от экрана - что поменялось на этом шаге, чью работу это закрывает и как было. Рисунок условный: это прототип сценария, а не арт. Полностью собранная версия со всеми экранами живёт <a class="inlink" href="https://nikit34.github.io/amazonia-trial/">отдельной страницей</a>.</p>
       </div>
     </div>
     <div class="sec-body">

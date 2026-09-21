@@ -125,6 +125,7 @@ p{margin:0}
 .btn:hover{filter:brightness(1.08)}
 .btn:active{transform:translateY(1px)}
 .btn.q{background:transparent;border:1px solid var(--line);color:var(--ink-2);font-weight:600}
+a.btn{display:block;text-decoration:none;box-sizing:border-box}
 .btn.j{background:var(--jade);color:#07130F}
 .btn:focus-visible,.tapzone:focus-visible,.whybtn:focus-visible,.chip:focus-visible,.step:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
 .tiny{font-size:11.5px;line-height:1.4;color:var(--ink-3);text-align:center}
@@ -670,8 +671,9 @@ p{margin:0}
           <p class="lede">Маршрут открыт прямо здесь, в той же сессии. Глава 3 ждёт в четырёх километрах отсюда.</p>
         </div>
         <div class="dock">
-          <button class="btn q" data-go="intro">Пройти демо заново</button>
-          <p class="tiny">Демо заканчивается здесь. Нажми «почему так» на любом экране, чтобы увидеть разбор решения.</p>
+          <a class="btn" href="https://nikit34.github.io/amazonia-trial/razbor/" target="_blank" rel="noopener">Как я к этому пришёл</a>
+          <button class="linkbtn" data-go="intro">пройти демо заново</button>
+          <p class="tiny">Воронка, работы клиента и математика конверсии — отдельной страницей. Решения по каждому экрану — кнопка «почему так».</p>
         </div>
       </section>
 
